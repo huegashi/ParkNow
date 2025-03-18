@@ -20,18 +20,22 @@ function Login() {
     <div className="login-form">
         <div className="park-now">Park Now</div>
           <input
+            className="bg-white text-black rounded-xl shadow-lg"
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <input
+            className="bg-white text-black rounded-xl shadow-lg"
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button onClick={handleLogin}>Login</button>
+          <button className="mt-2 bold-button" onClick={handleLogin}>
+            Login
+          </button>
     </div>
   );
 }
