@@ -2,7 +2,7 @@ import React from 'react';
 
 const BrowseCarparkUI = ({ searchTerm, handleInputChange, handleKeyPress, filteredOptions, handleChange, showTable }) => {
   return (
-    <div className="browse-carpark" style={{ maxWidth: '400px' }}>
+    <div className="browse-carpark" style={{ maxWidth: '400px', margin: '0 auto', textAlign: 'center' }}>
       <div style={{ color: 'white', marginBottom: '5px', fontSize: '0.8em' }}>
         *Press Enter to show all relevant carparks
       </div>
@@ -15,17 +15,17 @@ const BrowseCarparkUI = ({ searchTerm, handleInputChange, handleKeyPress, filter
         style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
       />
       {showTable && filteredOptions.length > 0 && (
-        <table className="filtered-options-table">
+        <table className="filtered-options-table" style={{ margin: '0 auto' }}>
           <thead>
             <tr>
-              <th>Carpark</th>
+              <th style={{ paddingRight: '20px' }}>Carpark</th>
               <th>Select</th>
             </tr>
           </thead>
           <tbody>
             {filteredOptions.map(option => (
               <tr key={option.value}>
-                <td>{option.label}</td>
+                <td style={{ paddingRight: '20px' }}>{option.label}</td>
                 <td>
                   <button onClick={() => handleChange(option)}>Select</button>
                 </td>

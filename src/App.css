@@ -143,3 +143,15 @@
 .bookings-list button:hover {
   background-color: #555;
 }
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px; /* Adjust as needed */
+}
+
+.loading-animation {
+  width: 120px; /* Adjust as needed - Reduced width to 50px */
+  margin-bottom: 10px;
+}
