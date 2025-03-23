@@ -4,7 +4,8 @@ import Login from './Login';
 import Home from './Home';
 import CarparkDetails from './CarparkDetails'; // Add this import
 import CheckIn from "./CheckIn"; 
-import CheckOut from "./CheckOut"; 
+import CheckOut from "./CheckOut";
+import CancelBooking from "./CancelBooking";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/carpark/:carparkName" element={<CarparkDetails />} />
           <Route path="/checkin/:bookingId" element={<CheckIn />} />
           <Route path="/checkout/:bookingId" element={<CheckOut />} />
+          <Route path="/cancelbooking/:bookingId" element={<CancelBooking />} />
         </Routes>
       </div>
     </Router>
