@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
-import AdvancedSearch from "./AdvancedSearch";
 
 function NavigationMenu() {
   const navigate = useNavigate();
