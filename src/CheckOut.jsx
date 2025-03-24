@@ -38,7 +38,9 @@ function CheckOut() {
     const updatedBookings = JSON.parse(localStorage.getItem("bookings")).map(
       (b) =>
         b.id === booking.id
-          ? { ...b, status: "No booking", slotsAvailable: b.slotsAvailable + 1 }
+          ? { ...b, status: "No booking", 
+            slotsAvailable: b.slotsAvailable + 1
+          }
           : b
     );
 

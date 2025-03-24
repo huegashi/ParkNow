@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import NavigationMenu from './NavigationMenu';
 
 //need change this part to carpark details based on carpark entity
 //make booking entity for our end, booking entity should contain a carpark
 //make global mock dataset of carpark A,b,C etc.
+
 const mockCarparks = {
   carparkA: {
     name: "Carpark A",
@@ -34,6 +35,7 @@ const mockCarparks = {
 
 function CarparkDetails() {
   const { carparkName } = useParams();
+  const navigate = useNavigate();
   const [carparkData, setCarparkData] = useState(null);
 
   useEffect(() => {
@@ -150,7 +152,7 @@ function CarparkDetails() {
           cursor: 'pointer',
           width: '10%' 
         }}
-        onClick={() => console.log('Initiate booking for:', carparkName)}
+        onClick={() => navigate(`/booking/${carparkName}`)}
       >
         Book Now
       </button>

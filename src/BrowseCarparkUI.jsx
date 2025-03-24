@@ -26,13 +26,13 @@ const BrowseCarparkUI = ({
           width: "100%",
           padding: "8px",
           marginBottom: "10px",
-          backgroundColor: "white",
+          backgroundColor: "black",
         }}
       />
       {showTable && filteredOptions.length > 0 && (
         <table
           className="filtered-options-table"
-          style={{ margin: "0 auto", backgroundColor: "white" }}
+          style={{ margin: "0 auto", backgroundColor: "black" }}
         >
           <thead>
             <tr>
