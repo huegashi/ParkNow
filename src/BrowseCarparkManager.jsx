@@ -8,11 +8,38 @@ const BrowseCarparkManager = () => {
   const [showTable, setShowTable] = useState(false);
   const navigate = useNavigate();
 
-  const options = [
-    { value: 'carparkA', label: 'Carpark A' },
-    { value: 'carparkB', label: 'Carpark B' },
-    { value: 'carparkC', label: 'Carpark C' },
-  ];
+  const mockCarparks = {
+    carparkA: {
+      name: "Carpark A",
+      availableLots: 15,
+      totalLots: 100,
+      location: "Main Street",
+      rates: "$2.50/hr"
+    },
+    carparkB: {
+      name: "Carpark B",
+      availableLots: 42,
+      totalLots: 150,
+      location: "Downtown",
+      rates: "$3.00/hr"
+    },
+    carparkC: {
+      name: "Carpark C",
+      availableLots: 78,
+      totalLots: 200,
+      location: "West District",
+      rates: "$2.00/hr"
+    }
+  };
+
+  const options = Object.keys(mockCarparks).map(key => ({
+    value: key,
+    label: mockCarparks[key].name,
+    availableLots: mockCarparks[key].availableLots,
+    totalLots: mockCarparks[key].totalLots,
+    location: mockCarparks[key].location,
+    rates: mockCarparks[key].rates
+  }));
 
   const handleChange = (option) => {
     setSelectedOption(option);

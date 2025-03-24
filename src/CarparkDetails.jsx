@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import NavigationMenu from './NavigationMenu';
 
-//need change this part to carpark details based on carpark entity
-//make booking entity for our end, booking entity should contain a carpark
-//make global mock dataset of carpark A,b,C etc.
+
 const mockCarparks = {
   carparkA: {
     name: "Carpark A",
@@ -28,9 +26,7 @@ const mockCarparks = {
     rates: "$2.00/hr"
   }
 };
-//create alt. : select on current carpark bookings -> carpark check out/cancel booking page?
-//how to record 30mins??
-//
+
 
 function CarparkDetails() {
   const { carparkName } = useParams();
