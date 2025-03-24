@@ -67,7 +67,7 @@ function Home() {
       <NavigationMenu />
       <BrowseCarparkManager onSearchSelect={handleSearchSelect} />
       <div className="bookings-list">
-        <h2>Current Carpark Bookings</h2>
+        <h2 style={{ marginTop: "10px" }}>Current Carpark Bookings</h2>
         <table>
           <thead>
             <tr>
