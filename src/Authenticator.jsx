@@ -23,10 +23,7 @@ const Authenticator = () => {
         .single();
 
       if (!error && userInfo.Password === password) {
-        // Add a delay before navigating
-        setTimeout(() => {
-          navigate("/home");
-        }, 3000); // Delay for 3 seconds (3000 milliseconds)
+        navigate("/home"); // Navigate immediately without delay
       } else {
         alert("Login failed. Please try again.");
       }
