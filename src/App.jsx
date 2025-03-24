@@ -6,6 +6,7 @@ import CarparkDetails from './CarparkDetails'; // Add this import
 import CheckIn from "./CheckIn"; 
 import CheckOut from "./CheckOut";
 import CancelBooking from "./CancelBooking";
+import BrowseCarparkManager from './BrowseCarparkManager'; // Import the new manager component
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/checkin/:bookingId" element={<CheckIn />} />
           <Route path="/checkout/:bookingId" element={<CheckOut />} />
           <Route path="/cancelbooking/:bookingId" element={<CancelBooking />} />
+          <Route path="/browse-carpark" element={<BrowseCarparkManager />} /> {/* Add the new route */}
         </Routes>
       </div>
     </Router>
