@@ -1,31 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import NavigationMenu from './NavigationMenu';
-
-const mockCarparks = {
-  carparkA: {
-    name: "Carpark A",
-    availableLots: 15,
-    totalLots: 100,
-    location: "Main Street",
-    rates: "$2.50/hr"
-  },
-  carparkB: {
-    name: "Carpark B",
-    availableLots: 42,
-    totalLots: 150,
-    location: "Downtown",
-    rates: "$3.00/hr"
-  },
-  carparkC: {
-    name: "Carpark C",
-    availableLots: 78,
-    totalLots: 200,
-    location: "West District",
-    rates: "$2.00/hr"
-  }
-};
-
+import NavigationMenu from '../components/NavigationMenu';
 
 function CarparkDetails() {
   const { carparkName } = useParams();
@@ -33,10 +8,11 @@ function CarparkDetails() {
   const [carparkData, setCarparkData] = useState(null);
 
   useEffect(() => {
-    // Get data from mock dataset based on URL parameter
-    const data = mockCarparks[carparkName];
-    setCarparkData(data);
-    
+    const storedBookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    const matchedCarpark = storedBookings.find(
+      (item) => item.carpark.toLowerCase().replace(/\s+/g, '') === carparkName.toLowerCase()
+    );
+    setCarparkData(matchedCarpark);
     console.log('Loaded data for:', carparkName);
   }, [carparkName]);
 
@@ -45,20 +21,19 @@ function CarparkDetails() {
   }
 
   const capacityPercentage = Math.floor(
-    (carparkData.availableLots / carparkData.totalLots) * 100
+    (carparkData.slotsAvailable / (carparkData.slotsAvailable + carparkData.slotsReserved)) * 100
   );
-  console.log(capacityPercentage);
 
-  const availabilityColor = carparkData.availableLots < 20 
+  const availabilityColor = carparkData.slotsAvailable < 20 
     ? 'red' 
-    : carparkData.availableLots < 50 
+    : carparkData.slotsAvailable < 50 
     ? 'orange' 
     : 'green';
 
   return (
     <div className="carpark-details">
       <NavigationMenu/>
-      <h2>{carparkData.name} Details</h2>
+      <h2>{carparkData.carpark} Details</h2>
       
       {/* Flex container for details and notification */}
       <div style={{ 
@@ -68,11 +43,11 @@ function CarparkDetails() {
       }}>
         {/* Left side - Carpark details */}
         <div style={{ flex: '1' }}>
-          <p><strong>Location:</strong> {carparkData.location}</p>
+          <p><strong>Location:</strong> {carparkData.location || 'N/A'}</p>
           <p style={{ color: availabilityColor }}>
-            <strong>Available Lots:</strong> {carparkData.availableLots}/{carparkData.totalLots}
+            <strong>Available Lots:</strong> {carparkData.slotsAvailable}/{carparkData.slotsAvailable + carparkData.slotsReserved}
           </p>
-          <p><strong>Hourly Rate:</strong> {carparkData.rates}</p>
+          <p><strong>Hourly Rate:</strong> {carparkData.rate || 'N/A'}</p>
         </div>
         
         {/* Right side - Notification box */}
@@ -102,7 +77,7 @@ function CarparkDetails() {
         </div>
       </div>
 
-      {/* Capacity Bar - Kept at the bottom */}
+      {/* Capacity Bar */}
       <div style={{ marginTop: '20px' }}>
         <h3>Current Capacity</h3>
         <div style={{
@@ -114,7 +89,6 @@ function CarparkDetails() {
           height: '30px',
           width: '100%',
         }}>
-          {/* Filled portion */}
           <div style={{
             width: `${capacityPercentage}%`,
             backgroundColor: capacityPercentage > 30 ? '#f5a623' : '#7ed321',
@@ -126,7 +100,6 @@ function CarparkDetails() {
           }}>
             {capacityPercentage}%
           </div>
-          {/* Remaining portion */}
           <div style={{
             width: `${100 - capacityPercentage}%`,
             backgroundColor: '#808080',

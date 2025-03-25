@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import './CheckIn.css';
+import '../../styles/Check.css';
 
 function CheckIn() {
   const { bookingId } = useParams();
@@ -94,17 +94,19 @@ function CheckIn() {
       return;
     }
 
-    alert("Check-in successful!");
-    // Update localStorage: Change status & reduce reserved slots by 1
-    const updatedBookings = JSON.parse(localStorage.getItem("bookings")).map(
-        (b) => 
-          b.id === booking.id 
-            ? { ...b, status: "Booking confirmed", slotsReserved: Math.max(0, b.slotsReserved - 1) } 
-            : b
-      );
+    if(timeDifference > 0){
+      alert("Check-in successful!");
+      // Update localStorage: Change status & reduce reserved slots by 1
+      const updatedBookings = JSON.parse(localStorage.getItem("bookings")).map(
+          (b) => 
+            b.id === booking.id 
+              ? { ...b, status: "Booking confirmed", slotsReserved: Math.max(0, b.slotsReserved - 1) } 
+              : b
+        );
 
-    localStorage.setItem("bookings", JSON.stringify(updatedBookings));
-    navigate("/home");
+      localStorage.setItem("bookings", JSON.stringify(updatedBookings));
+      navigate("/home");
+    }
   };
 
   return (

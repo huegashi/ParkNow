@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import "./CheckIn.css"; // Reusing same styles
+import "../../styles/Check.css"; // Reusing same styles
 
 function CheckOut() {
   const { bookingId } = useParams();

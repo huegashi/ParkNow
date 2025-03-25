@@ -1,0 +1,60 @@
+@keyframes flicker {
+    0% {
+      opacity: 1;
+    }
+    20% {
+      opacity: 0.5;
+    }
+    40% {
+      opacity: 1;
+    }
+    60% {
+      opacity: 0.3;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.7;
+    }
+  }
+
+.park-now{
+    font-family: Inter, sans-serif;
+    font-size: 8rem;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 10px;
+    text-shadow: 
+        2px 2px 0 rgba(186, 85, 211, 0.6),  /* Right and bottom shadow */
+        -2px -2px 0 rgba(186, 85, 211, 0.6), /* Left and top shadow */
+        2px -2px 0 rgba(186, 85, 211, 0.6),  /* Right and top shadow */
+        -2px 2px 0 rgba(186, 85, 211, 0.6); /* Left and bottom shadow */
+
+    animation: flicker 5s infinite;
+}
+
+.login-form{
+    margin-top: 80px;
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input-text{
+    background-color:rgba(255, 255, 255, 0.8);
+    color: black;
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #393c39;
+}
+
