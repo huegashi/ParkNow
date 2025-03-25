@@ -36,9 +36,14 @@ function CheckIn() {
           const updatedBookings = JSON.parse(localStorage.getItem("bookings")).map(
             (b) =>
               b.id === booking.id
-                ? { ...b, status: "No booking", slotsAvailable: b.slotsAvailable + 1 }
+                ? { 
+                    ...b, 
+                    status: "No booking", 
+                    slotsAvailable: b.slotsAvailable + 1,
+                    slotsReserved: Math.max(0, b.slotsReserved - 1)
+                  }
                 : b
-          );
+          );          
           localStorage.setItem("bookings", JSON.stringify(updatedBookings));
 
           // Redirect after showing message
