@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import supabase from "./supabase.js";
-import LoginUI from "./LoginUI";
-import './App.css';
+import supabase from "../supabase.js";
+import LoginUI from "../views/pages/LoginUI.jsx";
+import '../App.css';
 import { DotLottiePlayer } from '@dotlottie/react-player';
 
 const Authenticator = () => {

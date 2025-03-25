@@ -28,7 +28,6 @@ const BrowseCarparkUI = ({ searchTerm, handleInputChange, handleKeyPress, filter
                 <th style={{ paddingRight: '40px' }}>Location</th>
                 <th style={{ paddingRight: '40px' }}>Rate</th>
                 <th style={{ paddingRight: '40px' }}>Select</th>
-
               </tr>
             </thead>
             <tbody>

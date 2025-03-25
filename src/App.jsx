@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import Authenticator from './Authenticator';
-import Home from './Home';
-import CarparkDetails from './CarparkDetails';
-import CheckIn from './CheckIn';
-import CheckOut from './CheckOut';
-import BrowseCarparkManager from './BrowseCarparkManager'; // Import the new manager component
-import Booking from './Booking';
+import Authenticator from './controllers/Authenticator';
+import Home from './views/pages/Home';
+import CarparkDetails from './views/pages/CarparkDetails';
+import CheckIn from './views/pages/CheckIn';
+import CheckOut from './views/pages/CheckOut';
+import BrowseCarparkManager from './controllers/BrowseCarparkManager'; // Import the new manager component
+import Booking from './views/pages/Booking';
 
 
 function App() {

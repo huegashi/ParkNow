@@ -1,26 +1,26 @@
 import React from 'react';
+import "../../styles/login.css";
 
 const LoginUI = ({ username, setUsername, password, setPassword, handleLogin }) => {
   return (
-    <div>
-      <div className="park-now">Park Now</div>
+    <div className="login-container">
+      <h1 className="park-now">ParkNow</h1>
       <form className="login-form" onSubmit={handleLogin}>
-        <p>*Username and Password are case sensitive!</p>
         <input
-          className="bg-white text-black rounded-xl shadow-lg"
+          className="input-text"
           type="text"
           value={username}
           placeholder="Username"
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
-          className="bg-white text-black rounded-xl shadow-lg"
+          className="input-text"
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="mt-2 bold-button">Login</button>
+        <button className="login-button">Login</button>
       </form>
     </div>
   );

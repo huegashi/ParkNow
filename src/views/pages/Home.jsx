@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import "./App.css";
-import BrowseCarparkManager from "./BrowseCarparkManager";
-import NavigationMenu from "./NavigationMenu";
+import "../../App.css";
+import BrowseCarparkManager from "../../controllers/BrowseCarparkManager";
+import NavigationMenu from "../components/NavigationMenu";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
