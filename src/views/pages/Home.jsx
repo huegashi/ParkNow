@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "../../App.css";
-import BrowseCarparkManager from "../../controllers/BrowseCarparkManager";
+import BrowseCarparkController from "../../controllers/BrowseCarparkController";
 import NavigationMenu from "../components/NavigationMenu";
 import { useNavigate } from "react-router-dom";
 
@@ -65,7 +65,7 @@ function Home() {
   return (
     <div>
       <NavigationMenu />
-      <BrowseCarparkManager onSearchSelect={handleSearchSelect} />
+      <BrowseCarparkController onSearchSelect={handleSearchSelect} />
       <div className="bookings-list">
         <h2 style={{ marginTop: "10px" }}>Current Carpark Bookings</h2>
         <table>

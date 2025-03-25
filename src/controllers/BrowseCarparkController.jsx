@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import BrowseCarparkUI from '../views/components/BrowseCarparkUI';
+import BrowseCarparkUI from "../views/components/BrowseCarparkUI";
 
-const BrowseCarparkManager = () => {
+const BrowseCarparkController = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showTable, setShowTable] = useState(false);
   const [options, setOptions] = useState([]);
@@ -59,4 +59,4 @@ const BrowseCarparkManager = () => {
   );
 };
 
-export default BrowseCarparkManager;
+export default BrowseCarparkController;
