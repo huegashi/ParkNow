@@ -5,14 +5,14 @@ import passwordIcon from "../../assets/password-icon.png";
 
 const LoginUI = ({ username, setUsername, password, setPassword, handleLogin }) => {
   return (
-    <div>
+    <div className="login-container">
       {/* Header */}
       <h1 className="park-now">ParkNow</h1>
 
       {/* Login Form */}
       <form className="login-form" onSubmit={handleLogin}>
         {/* Username Input */}
-        <div className="login-container">
+        <div className="input-container">
           <img src={userIcon} alt="User Icon" className="user-icon" />
           <input
             className="input-text"
@@ -25,7 +25,7 @@ const LoginUI = ({ username, setUsername, password, setPassword, handleLogin }) 
         </div>
 
         {/* Password Input */}
-        <div className="login-container">
+        <div className="input-container">
           <img src={passwordIcon} alt="Password Icon" className="password-icon" />
           <input
             className="input-text"

@@ -8,15 +8,15 @@ import "./App.css";
 import Authenticator from "./controllers/Authenticator";
 import Home from "./views/pages/Home";
 import CarparkDetails from "./views/pages/CarparkDetails";
-import CheckIn from "./views/pages/CheckIn";
-import CheckOut from "./views/pages/CheckOut";
+import CheckIn from "./controllers/CheckInController";
+import CheckOut from "./controllers/CheckOutController";
 import BrowseCarparkController from "./controllers/BrowseCarparkController"; // Import the new manager component
-import Booking from "./views/pages/Booking";
+import Booking from "./controllers/BookingController";
 
 function App() {
   return (
     <Router>
-      <div className="app-background">
+      <div>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Authenticator />} />
