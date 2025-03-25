@@ -42,6 +42,16 @@
     max-width: 400px;
     margin-left: auto;
     margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-container{
+  display:flex;
+  align-items: center;
+  margin-bottom:15px;
+  width: 100%;
 }
 
 .input-text{
@@ -54,7 +64,24 @@
     cursor: pointer;
 }
 
+.user-icon,
+.password-icon{
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  background-color: white;
+  padding: 5px;
+  border-radius: 50%;
+}
+
 button:hover{
     background-color: #393c39;
+}
+
+.login-container {
+  display: flex;
+  align-items: center; /* Align items vertically in the center */
+  margin-bottom: 15px;
+  width: 100%; /* Ensure full width container */
 }
 

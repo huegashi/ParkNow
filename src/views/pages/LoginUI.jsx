@@ -1,26 +1,46 @@
 import React from 'react';
 import "../../styles/login.css";
+import userIcon from "../../assets/user-icon.png";
+import passwordIcon from "../../assets/password-icon.png";
 
 const LoginUI = ({ username, setUsername, password, setPassword, handleLogin }) => {
   return (
-    <div className="login-container">
+    <div>
+      {/* Header */}
       <h1 className="park-now">ParkNow</h1>
+
+      {/* Login Form */}
       <form className="login-form" onSubmit={handleLogin}>
-        <input
-          className="input-text"
-          type="text"
-          value={username}
-          placeholder="Username"
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          className="input-text"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button className="login-button">Login</button>
+        {/* Username Input */}
+        <div className="login-container">
+          <img src={userIcon} alt="User Icon" className="user-icon" />
+          <input
+            className="input-text"
+            type="text"
+            value={username}
+            placeholder="Username"
+            aria-label="Username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+
+        {/* Password Input */}
+        <div className="login-container">
+          <img src={passwordIcon} alt="Password Icon" className="password-icon" />
+          <input
+            className="input-text"
+            type="password"
+            value={password}
+            placeholder="Password"
+            aria-label="Password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
+        {/* Login Button */}
+        <button className="login-button" type="submit">
+          Login
+        </button>
       </form>
     </div>
   );
