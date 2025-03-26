@@ -2,13 +2,10 @@ import React from 'react';
 import "../../styles/login.css";
 import userIcon from "../../assets/user-icon.png";
 import passwordIcon from "../../assets/password-icon.png";
-import skyline from "../../assets/skyline.jpg";
 
 const LoginUI = ({ username, setUsername, password, setPassword, handleLogin }) => {
   return (
-    <div 
-      className="login-background" 
-    >
+    <div className="login-background">
       {/* Header */}
       <h1 className="park-now">ParkNow</h1>
 
