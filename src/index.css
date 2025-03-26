@@ -7,8 +7,6 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background: linear-gradient(0deg, #9095a1ff 0%, #171a1fff 61%);
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -30,7 +28,7 @@ body {
   min-height: 100vh;
   display:flex;
   flex-direction: column;
-  background-image: url("./assets/skyline.jpg");
+  background: linear-gradient(0deg, rgb(85, 91, 107) 0%, #171a1fff 61%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
