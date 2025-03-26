@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "../../App.css";
+import "../../styles/Home.css";
 import BrowseCarparkController from "../../controllers/BrowseCarparkController";
 import NavigationMenu from "../components/NavigationMenu";
 import { useNavigate } from "react-router-dom";
@@ -42,78 +42,90 @@ function Home() {
         ];
   });
 
+  // Save bookings to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("bookings", JSON.stringify(bookings));
   }, [bookings]);
 
+  // Handle search selection
   const handleSearchSelect = (carpark) => {
     setSearchTerm(carpark ? carpark.label : "");
   };
 
+  // Redirect to Check-In page
   const handleCheckInRedirect = (bookingId) => {
     navigate(`/checkin/${bookingId}`);
   };
 
+  // Redirect to Check-Out page
   const handleCheckOutRedirect = (bookingId) => {
     navigate(`/checkout/${bookingId}`);
   };
 
+  // Filter bookings based on the search term
   const filteredBookings = bookings.filter((booking) =>
     booking.carpark.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div>
+      {/* Navigation Menu */}
       <NavigationMenu />
-      <BrowseCarparkController onSearchSelect={handleSearchSelect} />
-      <div className="bookings-list">
-        <h2 style={{ marginTop: "10px" }}>Current Carpark Bookings</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Location</th>
-              <th>Slots Available</th>
-              <th>Slots Reserved</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredBookings.map((booking) => (
-              <tr key={booking.id}>
-                <td>{booking.name}</td>
-                <td>{booking.carpark}</td>
-                <td>{booking.slotsAvailable}</td>
-                <td>{booking.slotsReserved}</td>
-                <td>{booking.status}</td>
-                <td>
-                  {booking.status === "No booking" ? (
-                    <button disabled>Not Available</button>
-                  ) : booking.status === "Booking pending" ? (
-                    <button
-                      onClick={() => {
-                        handleCheckInRedirect(booking.id);
-                      }}
-                    >
-                      Check In
-                    </button>
-                  ) : booking.status === "Booking confirmed" ? (
-                    <button
-                      onClick={() => {
-                        handleCheckOutRedirect(booking.id);
-                      }}
-                    >
-                      Check Out
-                    </button>
-                  ) : (
-                    <button disabled>Not Available</button>
-                  )}
-                </td>
+
+      {/* Search and Carpark List */}
+      <div className="home-container">
+        <BrowseCarparkController onSearchSelect={handleSearchSelect} />
+
+        <div className="bookings-list">
+          <h2 className="bookings-header">Current Carpark Bookings</h2>
+
+          <table className="bookings-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Slots Available</th>
+                <th>Slots Reserved</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredBookings.map((booking) => (
+                <tr key={booking.id}>
+                  <td>{booking.name}</td>
+                  <td>{booking.carpark}</td>
+                  <td>{booking.slotsAvailable}</td>
+                  <td>{booking.slotsReserved}</td>
+                  <td>{booking.status}</td>
+                  <td>
+                    {booking.status === "No booking" && (
+                      <button className="action-button" disabled>
+                        Not Available
+                      </button>
+                    )}
+                    {booking.status === "Booking pending" && (
+                      <button
+                        className="action-button"
+                        onClick={() => handleCheckInRedirect(booking.id)}
+                      >
+                        Check In
+                      </button>
+                    )}
+                    {booking.status === "Booking confirmed" && (
+                      <button
+                        className="action-button"
+                        onClick={() => handleCheckOutRedirect(booking.id)}
+                      >
+                        Check Out
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
