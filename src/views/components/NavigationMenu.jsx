@@ -6,14 +6,24 @@ function NavigationMenu() {
   const navigate = useNavigate();
   const [pendingBooking, setPendingBooking] = useState(null);
   const [confirmedBooking, setConfirmedBooking] = useState(null);
+  const [cancelBooking, setcancelBooking] = useState(null);
+  const handleCancelBookingNavigation = () => {
+    if (cancelBooking) {
+      navigate(`/cancelbooking/${cancelBooking.id}`);
+    } else {
+      alert("No confirmed bookings available for cancellation.");
+    }
+  };
 
   useEffect(() => {
     const savedBookings = JSON.parse(localStorage.getItem("bookings")) || [];
     const activeCheckIn = savedBookings.find((b) => b.status === "Booking pending");
     const activeCheckOut = savedBookings.find((b) => b.status === "Booking confirmed");
+    const activeCancel = savedBookings.find ((b) => b.status === "Booking pending"); 
 
     setPendingBooking(activeCheckIn);
     setConfirmedBooking(activeCheckOut);
+    setcancelBooking(activeCancel);
   }, []);
 
   const handleCheckInNavigation = () => {
@@ -31,6 +41,8 @@ function NavigationMenu() {
       alert("No confirmed bookings available for check-out.");
     }
   };
+  
+
 
   return (
     <nav className="nav-container">
@@ -39,7 +51,7 @@ function NavigationMenu() {
         <li onClick={() => navigate("/home")} className="nav-item">
           Search Booking
         </li>
-        <li onClick={() => navigate("/home")} className="nav-item">
+        <li onClick={handleCancelBookingNavigation} className="nav-item">
           Cancel Booking
         </li>
         <li onClick={handleCheckInNavigation} className="nav-item">

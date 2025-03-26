@@ -12,6 +12,7 @@ import CheckIn from "./controllers/CheckInController";
 import CheckOut from "./controllers/CheckOutController";
 import BrowseCarparkController from "./controllers/BrowseCarparkController"; // Import the new manager component
 import Booking from "./controllers/BookingController";
+import CancelBooking from "./controllers/CancelBookingController";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/carpark/:carparkName" element={<CarparkDetails />} />
           <Route path="/booking/:carparkName" element={<Booking />} />
+          <Route path ="/cancelbooking/:bookingId" element={<CancelBooking />} />
           <Route path="/checkin/:bookingId" element={<CheckIn />} />
           <Route path="/checkout/:bookingId" element={<CheckOut />} />
           <Route
