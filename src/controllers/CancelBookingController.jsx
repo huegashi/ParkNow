@@ -44,6 +44,7 @@ export default function CancelBooking(){
        }
    }
    return(
+    <div className = "bg">
        <div className = "MainBox">
            <h2 className = "CancelHeader">Cancel Booking</h2>
            {error && <p className = "error">{error}</p>}
@@ -55,5 +56,6 @@ export default function CancelBooking(){
              Cancel Booking
            </button>
        </div>
+      </div>
    )
 }

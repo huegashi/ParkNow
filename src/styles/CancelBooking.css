@@ -1,3 +1,18 @@
+.bg {
+   background-image: url("https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjV5Y3hyN2J2OXhqZDBsMDV0eWt1OG54cDBpa2E0MzRnYzZ0OGx1bCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RfnQuPrBYOzpdh8yrh/giphy.gif");
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-attachment: fixed;
+   height: 50vw;
+   width: 75vw;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-top: 1vw;
+ }
+
+
 .MainBox{
     width: 400px;
     height: 300px;
@@ -23,7 +38,7 @@
     margin-bottom: 15px;
   }
 
-  
+
  .CancelParas {
   font-size: 16px;
   color: #555;
