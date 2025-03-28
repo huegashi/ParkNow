@@ -44,14 +44,18 @@ export default function CancelBooking(){
        }
    }
    return(
+    <div className = "bg">
        <div className = "MainBox">
-           <h2>Cancel Booking</h2>
-           {error && <p className="error">{error}</p>}
-           <p><strong>Carpark:</strong> {booking?.carpark || "Loading..."}</p>
-           <p><strong>Status:</strong> {booking?.status || "Loading..."}</p>
-           <button onClick={handleCancelBooking} disabled={!booking}>
+           <h2 className = "CancelHeader">Cancel Booking</h2>
+           {error && <p className = "error">{error}</p>}
+           <div className = "CancelParas">
+               <p><strong>Carpark:</strong> {booking?.carpark || "Loading..."}</p>
+               <p><strong>Status:</strong> {booking?.status || "Loading..."}</p>
+           </div>
+           <button className = "CancelButton" onClick={handleCancelBooking} disabled={!booking}>
              Cancel Booking
            </button>
        </div>
+      </div>
    )
 }
