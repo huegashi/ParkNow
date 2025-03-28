@@ -79,3 +79,23 @@ button:hover{
   margin-right: 36px;
   width: 100%; /* Ensure full width container */
 }
+
+.login-background {
+  background-image: url("../assets/skyline.jpg"); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Pin element to top, left, right, bottom of screen */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
