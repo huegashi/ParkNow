@@ -3,17 +3,17 @@ import { useNavigate } from "react-router-dom";
 import supabase from "../supabase.js";
 import LoginUI from "../views/pages/LoginUI.jsx";
 import '../App.css';
-import { DotLottiePlayer } from '@dotlottie/react-player';
+import Loading from "../views/components/Loading.jsx"; // Import the new Loading component
 
 const Authenticator = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); // Added loading state
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when login starts
+    setLoading(true);
 
     try {
       const { data: userInfo, error } = await supabase
@@ -23,7 +23,7 @@ const Authenticator = () => {
         .single();
 
       if (!error && userInfo.Password === password) {
-        navigate("/home"); // Navigate immediately without delay
+        navigate("/home");
       } else {
         alert("Login failed. Please try again.");
       }
@@ -31,7 +31,7 @@ const Authenticator = () => {
       console.error("Authentication error:", err);
       alert("An error occurred during login. Please try again.");
     } finally {
-      setLoading(false); // Set loading to false when login finishes
+      setLoading(false);
       setUsername("");
       setPassword("");
     }
@@ -40,15 +40,7 @@ const Authenticator = () => {
   return (
     <div>
       {loading ? (
-        <div className="loading-container">
-          <DotLottiePlayer
-            src="/loading-car.lottie"
-            autoplay
-            loop
-            className="loading-animation"
-          />
-          <p>Authenticating...</p>
-        </div> // Render loading indicator with DotLottie animation
+        <Loading /> // Use the new Loading component
       ) : (
         <LoginUI
           username={username}
