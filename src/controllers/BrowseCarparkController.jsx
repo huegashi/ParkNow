@@ -6,6 +6,7 @@ const BrowseCarparkController = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showTable, setShowTable] = useState(false);
   const [options, setOptions] = useState([]);
+  const [errorMessage, setErrorMessage] = useState(""); // New state for error messages
   const navigate = useNavigate();
 
   // Load carpark data from localStorage (bookings)
@@ -35,11 +36,28 @@ const BrowseCarparkController = () => {
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
+    setErrorMessage(""); // Clear error message on typing
   };
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      setShowTable(true);
+      if (searchTerm.trim() === "") { // Check for empty input
+        setErrorMessage("❌ No carpark selected. Please enter a valid carpark name.");
+        setShowTable(false); // Prevent displaying the table
+        return;
+      }
+
+      const filteredOptions = options.filter((option) =>
+        option.label.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+      if (filteredOptions.length === 0) { // Check if no valid carparks match
+        setErrorMessage(`❌ Invalid Carpark Name: "${searchTerm}". Please enter a valid carpark name.`);
+        setShowTable(false); // Prevent displaying the table
+        return;
+      }
+
+      setShowTable(true); // Proceed to show table if valid options exist
     }
   };
 
@@ -55,6 +73,7 @@ const BrowseCarparkController = () => {
       filteredOptions={filteredOptions}
       handleChange={handleChange}
       showTable={showTable}
+      errorMessage={errorMessage} // Pass error message to UI
     />
   );
 };

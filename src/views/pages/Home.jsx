@@ -20,6 +20,7 @@ function Home() {
             slotsReserved: 5,
             status: "No booking",
             startTime: null,
+            location: "Orchard Road" 
           },
           {
             id: 2,
@@ -29,6 +30,7 @@ function Home() {
             slotsReserved: 3,
             status: "Booking pending",
             startTime: new Date().getTime() + 10 * 1000,
+            location: "Marina Bay Sands" 
           },
           {
             id: 3,
@@ -38,7 +40,8 @@ function Home() {
             slotsReserved: 7,
             status: "No booking",
             startTime: null,
-          },
+            location: "Sentosa"
+          }
         ];
   });
 
@@ -83,7 +86,7 @@ function Home() {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Location</th>
+                <th>Carpark</th>
                 <th>Slots Available</th>
                 <th>Slots Reserved</th>
                 <th>Status</th>
