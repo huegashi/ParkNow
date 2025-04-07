@@ -1,7 +1,7 @@
 import {useEffect,useState} from 'react'
 import { useParams, useNavigate } from "react-router-dom";
-import '../styles/CancelBooking.css'
-export default function CancelBooking(){
+import CancelBookingUI from "../views/pages/CancelBookingUI";
+function CancelBookingController() {
    const { bookingId } = useParams();
    const navigate = useNavigate();
    const [booking, setBooking] = useState(null);
@@ -43,19 +43,13 @@ export default function CancelBooking(){
              navigate("/home");
        }
    }
-   return(
-    <div className = "bg">
-       <div className = "MainBox">
-           <h2 className = "CancelHeader">Cancel Booking</h2>
-           {error && <p className = "error">{error}</p>}
-           <div className = "CancelParas">
-               <p><strong>Carpark:</strong> {booking?.carpark || "Loading..."}</p>
-               <p><strong>Status:</strong> {booking?.status || "Loading..."}</p>
-           </div>
-           <button className = "CancelButton" onClick={handleCancelBooking} disabled={!booking}>
-             Cancel Booking
-           </button>
-       </div>
-      </div>
-   )
+   return (
+    <CancelBookingUI
+      booking={booking}
+      error={error}
+      handleCancelBooking={handleCancelBooking}
+    />
+  );
 }
+
+export default CancelBookingController;
