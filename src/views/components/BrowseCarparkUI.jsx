@@ -7,13 +7,17 @@ const BrowseCarparkUI = ({
   handleKeyPress, 
   filteredOptions, 
   handleChange, 
-  showTable,
-  errorMessage
+  showTable, 
+  errorMessage, 
+  currentPage, 
+  totalPages, 
+  handleNextPage, 
+  handlePreviousPage 
 }) => {
   return (
     <div className="browse-carpark-container">
       <div className="browse-carpark-header">
-        {/* <p>*Press Enter to show all relevant carparks</p> */}
+        <p>*Press Enter to show all relevant carparks</p>
       </div>
       <input
         type="text"
@@ -33,7 +37,7 @@ const BrowseCarparkUI = ({
       {showTable && filteredOptions.length > 0 && (
         <>
           <div className="browse-carpark-note">
-            {/* <p>! indicates low availability</p> */}
+            <p>! indicates low availability</p>
           </div>
           <table className="browse-carpark-table">
             <thead>
@@ -46,7 +50,7 @@ const BrowseCarparkUI = ({
               </tr>
             </thead>
             <tbody>
-              {filteredOptions.map(option => (
+              {filteredOptions.map((option) => (
                 <tr key={option.value}>
                   <td>{option.label}</td>
                   <td>{option.availableLots}</td>
@@ -59,6 +63,27 @@ const BrowseCarparkUI = ({
               ))}
             </tbody>
           </table>
+
+          {/* Pagination Controls */}
+          <div className="pagination-controls">
+            <button
+              onClick={handlePreviousPage}
+              disabled={currentPage === 1}
+              className="pagination-button"
+            >
+              Previous
+            </button>
+            <span className="pagination-info">
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+              className="pagination-button"
+            >
+              Next
+            </button>
+          </div>
         </>
       )}
     </div>

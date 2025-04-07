@@ -7,6 +7,8 @@ const BrowseCarparkController = () => {
   const [showTable, setShowTable] = useState(false);
   const [options, setOptions] = useState([]);
   const [errorMessage, setErrorMessage] = useState(""); // New state for error messages
+  const [currentPage, setCurrentPage] = useState(1); // Current page state
+  const itemsPerPage = 10; // Limit items per page
   const navigate = useNavigate();
 
   // Load carpark data from localStorage (bookings)
@@ -37,6 +39,7 @@ const BrowseCarparkController = () => {
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
     setErrorMessage(""); // Clear error message on typing
+    setCurrentPage(1); // Reset to the first page when search term changes
   };
 
   const handleKeyPress = (event) => {
@@ -61,19 +64,43 @@ const BrowseCarparkController = () => {
     }
   };
 
+  // Filter options based on the search term
   const filteredOptions = options.filter((option) =>
     option.label.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredOptions.length / itemsPerPage);
+  const paginatedOptions = filteredOptions.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
 
   return (
     <BrowseCarparkUI
       searchTerm={searchTerm}
       handleInputChange={handleInputChange}
       handleKeyPress={handleKeyPress}
-      filteredOptions={filteredOptions}
+      filteredOptions={paginatedOptions} // Pass only paginated options
       handleChange={handleChange}
       showTable={showTable}
       errorMessage={errorMessage} // Pass error message to UI
+      currentPage={currentPage} // Pass current page
+      totalPages={totalPages} // Pass total pages
+      handleNextPage={handleNextPage} // Pass next page handler
+      handlePreviousPage={handlePreviousPage} // Pass previous page handler
     />
   );
 };

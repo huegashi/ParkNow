@@ -3,51 +3,54 @@ import "../../styles/Home.css";
 import BrowseCarparkController from "../../controllers/BrowseCarparkController";
 import NavigationMenu from "../components/NavigationMenu";
 import { useNavigate } from "react-router-dom";
+import { useCarpark } from "../../context/CarparkContext";
 
 function Home() {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const [bookings, setBookings] = useState(() => {
-    const savedBookings = localStorage.getItem("bookings");
-    return savedBookings
-      ? JSON.parse(savedBookings)
-      : [
-          {
-            id: 1,
-            name: "Booking 1",
-            carpark: "Carpark A",
-            slotsAvailable: 10,
-            slotsReserved: 5,
-            status: "No booking",
-            startTime: null,
-            location: "Orchard Road" 
-          },
-          {
-            id: 2,
-            name: "Booking 2",
-            carpark: "Carpark B",
-            slotsAvailable: 8,
-            slotsReserved: 3,
-            status: "Booking pending",
-            startTime: new Date().getTime() + 10 * 1000,
-            location: "Marina Bay Sands" 
-          },
-          {
-            id: 3,
-            name: "Booking 3",
-            carpark: "Carpark C",
-            slotsAvailable: 15,
-            slotsReserved: 7,
-            status: "No booking",
-            startTime: null,
-            location: "Sentosa"
-          }
-        ];
-  });
+  const [bookings, setBookings] = useState([]);
+  const carparkInstance = useCarpark(); // Instantiate the Carpark class
+
+  // Fetch carpark data and store it in localStorage
+  useEffect(() => {
+    const fetchCarparkData = async () => {
+      const storedBookings = localStorage.getItem("bookings");
+
+      if (!storedBookings) {
+        // If localStorage is empty, fetch data from the API
+        await carparkInstance.loadCarparkData();
+        const carparkData = carparkInstance.getCarparks();
+        console.log("Fetched carpark data:", carparkData);
+
+        // Format the data for the application
+        const formattedBookings = carparkData.map((carpark, index) => ({
+          id: index + 1,
+          name: `Booking ${index + 1}`,
+          carpark: carpark.carparkNumber,
+          slotsAvailable: carpark.availableLots,
+          slotsReserved: carpark.totalLots - carpark.availableLots,
+          status: "No booking",
+          startTime: null,
+          location: carpark.location || "Unknown Location",
+        }));
+
+        // Save the formatted data to localStorage
+        localStorage.setItem("bookings", JSON.stringify(formattedBookings));
+        setBookings(formattedBookings); // Update the state
+      } else {
+        // If localStorage already has data, load it into state
+        setBookings(JSON.parse(storedBookings));
+      }
+    };
+
+    fetchCarparkData();
+  }, [carparkInstance]);
 
   // Save bookings to localStorage whenever they change
   useEffect(() => {
-    localStorage.setItem("bookings", JSON.stringify(bookings));
+    if (bookings.length > 0) {
+      localStorage.setItem("bookings", JSON.stringify(bookings));
+    }
   }, [bookings]);
 
   // Handle search selection
@@ -67,7 +70,8 @@ function Home() {
 
   // Filter bookings based on the search term
   const filteredBookings = bookings.filter((booking) =>
-    booking.carpark.toLowerCase().includes(searchTerm.toLowerCase())
+    booking.carpark.toLowerCase().includes(searchTerm.toLowerCase()) &&
+    booking.status !== "No booking"
   );
 
   return (

@@ -11,6 +11,7 @@ export class Carpark {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
+      console.log('Carpark data fetched successfully:', data);
       return data;
     } catch (error) {
       console.error('Fetch error: ', error);
@@ -32,7 +33,7 @@ export class Carpark {
           lastUpdated: carpark.update_datetime,
         }));
       }).flat();
-      console.log('Carpark data loaded into Carpark object.');
+      console.log('Carpark data loaded into Carpark object.', this.carparks);
     } else {
       console.error('No carpark data available.');
     }
@@ -46,5 +47,11 @@ export class Carpark {
   // Example of a method to get available carparks (optional)
   getAvailableCarparks() {
     return this.carparks.filter(carpark => carpark.availableLots > 0);
+  }
+
+  // List of carparks with pagination
+  getPaginatedCarparks(page = 1, limit = 10) {
+    const startIndex = (page - 1) * limit;
+    return this.carparks.slice(startIndex, startIndex + limit);
   }
 }

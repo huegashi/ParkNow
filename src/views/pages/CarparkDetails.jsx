@@ -93,7 +93,7 @@ function CarparkDetails() {
           }}>
             <div style={{
               width: `${capacityPercentage}%`,
-              backgroundColor: capacityPercentage > 30 ? '#f5a623' : '#7ed321',
+              backgroundColor: capacityPercentage < 30 ? '#f5a623' : '#7ed321',
               height: '100%',
               textAlign: 'center',
               color: '#fff',
