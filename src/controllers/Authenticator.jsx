@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import supabase from "../supabase.js";
 import LoginUI from "../views/pages/LoginUI.jsx";
 import '../App.css';
-import Loading from "../views/components/Loading.jsx"; // Import the new Loading component
+import Loading from "../views/components/Loading.jsx";
 
 const Authenticator = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -16,13 +16,12 @@ const Authenticator = () => {
     setLoading(true);
 
     try {
-      const { data: userInfo, error } = await supabase
-        .from("Users")
-        .select("*")
-        .eq("Username", username)
-        .single();
+      const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+        email: email.toLowerCase(), // Normalize email to lowercase
+        password: password,
+      });
 
-      if (!error && userInfo.Password === password) {
+      if (!authError && authData?.user) {
         navigate("/home");
       } else {
         alert("Login failed. Please try again.");
@@ -32,7 +31,7 @@ const Authenticator = () => {
       alert("An error occurred during login. Please try again.");
     } finally {
       setLoading(false);
-      setUsername("");
+      setEmail("");
       setPassword("");
     }
   };
@@ -40,11 +39,11 @@ const Authenticator = () => {
   return (
     <div>
       {loading ? (
-        <Loading /> // Use the new Loading component
+        <Loading />
       ) : (
         <LoginUI
-          username={username}
-          setUsername={setUsername}
+          email={email}
+          setEmail={setEmail}
           password={password}
           setPassword={setPassword}
           handleLogin={handleLogin}

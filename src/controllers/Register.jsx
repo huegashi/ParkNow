@@ -68,19 +68,6 @@ const Register = () => {
         return;
       }
 
-      const userId = authData.user.id;
-
-      const { error: insertError } = await supabase
-        .from("Users")
-        .insert([{ id: userId, Username: username }]); // Assuming 'id' is the foreign key
-
-      if (insertError) {
-        console.error("Error inserting username:", insertError);
-        await supabase.auth.signOut(); // Clean up if user creation failed partially
-        alert("Failed to save user details. Please try again.");
-        return;
-      }
-
       alert("Registration successful!");
       setEmail(""); // Reset email field
       setUsername("");

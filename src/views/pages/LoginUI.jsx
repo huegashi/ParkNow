@@ -4,7 +4,7 @@ import userIcon from "../../assets/user-icon.png";
 import passwordIcon from "../../assets/password-icon.png";
 import { useNavigate } from "react-router-dom";
 
-const LoginUI = ({ username, setUsername, password, setPassword, handleLogin, handleRegister }) => {
+const LoginUI = ({ email, setEmail, password, setPassword, handleLogin, handleRegister }) => {
   const navigate = useNavigate(); // Initialize navigate
 
   return (
@@ -14,16 +14,16 @@ const LoginUI = ({ username, setUsername, password, setPassword, handleLogin, ha
 
       {/* Login Form */}
       <form className="login-form" onSubmit={handleLogin}>
-        {/* Username Input */}
+        {/* Email Input */}
         <div className="input-container">
           <img src={userIcon} alt="User Icon" className="user-icon" />
           <input
             className="input-text"
-            type="text"
-            value={username}
-            placeholder="Username"
-            aria-label="Username"
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            value={email} // Use email instead of username
+            placeholder="Email"
+            aria-label="Email"
+            onChange={(e) => setEmail(e.target.value)} // Update email state
           />
         </div>
 
