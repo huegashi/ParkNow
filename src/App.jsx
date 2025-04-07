@@ -13,6 +13,7 @@ import CheckOut from "./controllers/CheckOutController";
 import BrowseCarparkController from "./controllers/BrowseCarparkController"; // Import the new manager component
 import Booking from "./controllers/BookingController";
 import CancelBooking from "./controllers/CancelBookingController";
+import Register from "./controllers/Register";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path ="/cancelbooking/:bookingId" element={<CancelBooking />} />
           <Route path="/checkin/:bookingId" element={<CheckIn />} />
           <Route path="/checkout/:bookingId" element={<CheckOut />} />
+          <Route path="/login/register" element={<Register />} />
           <Route
             path="/browse-carpark"
             element={<BrowseCarparkController />}

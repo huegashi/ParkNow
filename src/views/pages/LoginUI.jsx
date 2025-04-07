@@ -2,8 +2,11 @@ import React from 'react';
 import "../../styles/login.css";
 import userIcon from "../../assets/user-icon.png";
 import passwordIcon from "../../assets/password-icon.png";
+import { useNavigate } from "react-router-dom";
 
-const LoginUI = ({ username, setUsername, password, setPassword, handleLogin }) => {
+const LoginUI = ({ username, setUsername, password, setPassword, handleLogin, handleRegister }) => {
+  const navigate = useNavigate(); // Initialize navigate
+
   return (
     <div className="login-background">
       {/* Header */}
@@ -42,6 +45,11 @@ const LoginUI = ({ username, setUsername, password, setPassword, handleLogin }) 
           Login
         </button>
       </form>
+
+      {/* Register Button */}
+      <button className="register-button" onClick={() => navigate("/login/register")}>
+        Register
+      </button>
     </div>
   );
 };
