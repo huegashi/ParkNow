@@ -4,7 +4,7 @@ import supabase from "../supabase.js";
 import LoginUI from "../views/pages/LoginUI.jsx";
 import '../App.css';
 import Loading from "../views/components/Loading.jsx"; // Import the new Loading component
-import Carpark from "../models/Carpark.jsx"; // Import the Carpark model
+import {Carpark} from "../models/Carpark.jsx"; // Import the Carpark model
 
 const Authenticator = () => {
   const navigate = useNavigate();
