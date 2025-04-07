@@ -4,16 +4,22 @@ import supabase from "../supabase.js";
 import LoginUI from "../views/pages/LoginUI.jsx";
 import '../App.css';
 import Loading from "../views/components/Loading.jsx"; // Import the new Loading component
+import Carpark from "../models/Carpark.jsx"; // Import the Carpark model
 
 const Authenticator = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [carpark, setCarpark] = useState(null);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    const carparkInstance = new Carpark();
+    await carparkInstance.loadCarparkData();
+    setCarpark(carparkInstance);
 
     try {
       const { data: userInfo, error } = await supabase

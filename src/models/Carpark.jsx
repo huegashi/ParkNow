@@ -1,5 +1,3 @@
-import { fetchCarparkData } from '../services/carparkServices';
-
 export class Carpark {
   constructor() {
     this.carparks = [];  // This will hold the carpark data
