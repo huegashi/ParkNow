@@ -1,4 +1,5 @@
 import React from 'react';
+import "../../styles/BrowseCarparkUI.css"; // Import a CSS file for better styling
 
 const BrowseCarparkUI = ({ 
   searchTerm, 
@@ -10,9 +11,9 @@ const BrowseCarparkUI = ({
   errorMessage
 }) => {
   return (
-    <div className="browse-carpark" style={{ maxWidth: '400px', margin: '0 auto', textAlign: 'center' }}>
-      <div style={{ color: 'white', marginBottom: '5px', fontSize: '0.8em' }}>
-        *Press Enter to show all relevant carparks
+    <div className="browse-carpark-container">
+      <div className="browse-carpark-header">
+        {/* <p>*Press Enter to show all relevant carparks</p> */}
       </div>
       <input
         type="text"
@@ -20,21 +21,21 @@ const BrowseCarparkUI = ({
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
         placeholder="Search for a carpark..."
-        style={{ width: '100%', padding: '8px', marginBottom: '10px' }}
+        className="browse-carpark-input"
       />
 
       {errorMessage && (
-        <div style={{ color: 'red', marginBottom: '10px' }}>
+        <div className="browse-carpark-error">
           {errorMessage}
         </div>
       )}
 
       {showTable && filteredOptions.length > 0 && (
         <>
-          <div style={{ color: 'white', marginBottom: '5px', fontSize: '0.8em' }}>
-            ! indicates low availability
+          <div className="browse-carpark-note">
+            {/* <p>! indicates low availability</p> */}
           </div>
-          <table className="filtered-options-table" style={{ margin: '0 auto', textAlign: 'left' }}>
+          <table className="browse-carpark-table">
             <thead>
               <tr>
                 <th>Carpark</th>
@@ -52,7 +53,7 @@ const BrowseCarparkUI = ({
                   <td>{option.location}</td>
                   <td>{option.rates}</td>
                   <td>
-                    <button onClick={() => handleChange(option)}>Select</button>
+                    <button className="select-button" onClick={() => handleChange(option)}>Select</button>
                   </td>
                 </tr>
               ))}

@@ -1,48 +1,52 @@
-class Carpark {
-  constructor(name, address, totalLots, lotType, availLots) {
-    this.name = name;
-    this.address = address;
-    this.totalLots = totalLots;
-    this.lotType = lotType;
-    this.availLots = availLots;
+import { fetchCarparkData } from '../services/carparkServices';
+
+export class Carpark {
+  constructor() {
+    this.carparks = [];  // This will hold the carpark data
   }
 
-  getName() {
-    return this.name;
+  // Method to fetch carpark data from the HDB API
+  async fetchCarparkData() {
+    try {
+      const response = await fetch('https://api.data.gov.sg/v1/transport/carpark-availability');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Fetch error: ', error);
+      return null;
+    }
   }
 
-  getAddress() {
-    return this.address;
-  }
-  setAddress(address) {
-    this.address = address;
-  }
-
-  getTotalLots() {
-    return this.totalLots;
-  }
-  setTotalLots(totalLots) {
-    this.totalLots = totalLots;
-  }
-
-  getLotType() {
-    return this.lotType;
-  }
-  setLotType(lotType) {
-    this.lotType = lotType;
-  }
-
-  getAvailLots() {
-    return this.availLots;
-  }
-  setAvailLots(availLots) {
-    this.availLots = availLots;
+  // Method to load carpark data and store it in the instance
+  async loadCarparkData() {
+    const carparkData = await this.fetchCarparkData();
+    
+    if (carparkData && carparkData.items) {
+      this.carparks = carparkData.items[0].carpark_data.map(carpark => {
+        return carpark.carpark_info.map(info => ({
+          carparkNumber: carpark.carpark_number,
+          lotType: info.lot_type,
+          totalLots: info.total_lots,
+          availableLots: info.lots_available,
+          lastUpdated: carpark.update_datetime,
+        }));
+      }).flat();
+      console.log('Carpark data loaded into Carpark object.');
+    } else {
+      console.error('No carpark data available.');
+    }
   }
 
-  // Helper method to calculate occupancy percentage
-  getOccupancyPercentage() {
-    return ((this.totalLots - this.availLots) / this.totalLots) * 100;
+  // Method to get all carpark data (or filter as needed)
+  getCarparks() {
+    return this.carparks;
+  }
+
+  // Example of a method to get available carparks (optional)
+  getAvailableCarparks() {
+    return this.carparks.filter(carpark => carpark.availableLots > 0);
   }
 }
-
-export default Carpark;
