@@ -30,7 +30,8 @@ ParkNow aims to stand out by:
 
 * Providing a user-friendly and intuitive interface focused on speed and efficiency.
 * Integrating real-time availability data with a direct booking system.
-* Potentially incorporating smart features like personalized parking recommendations based on user history and location (future enhancement).
+* Fixed-interval where users must check into location
+* If time limit is exceeded for booking, then booking is given up
 
 ## 4. Key Features and Functionalities <a name="key-features-and-functionalities"></a>
 
