@@ -39,7 +39,6 @@ const BrowseCarparkUI = ({
       {showTable && filteredOptions.length > 0 && (
         <>
           <div className="browse-carpark-note">
-            <p>! indicates low availability</p>
             {isSearchingByAddress && (
               <p>Showing carparks matching the address search</p>
             )}
