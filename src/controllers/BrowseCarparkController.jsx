@@ -1,36 +1,38 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import BrowseCarparkUI from "../views/components/BrowseCarparkUI";
+import { fetchCarparksByAddress } from "../services/carparkServices";
 
 const BrowseCarparkController = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showTable, setShowTable] = useState(false);
   const [options, setOptions] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(""); // New state for error messages
-  const [currentPage, setCurrentPage] = useState(1); // Current page state
-  const itemsPerPage = 10; // Limit items per page
+  const [errorMessage, setErrorMessage] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isSearchingByAddress, setIsSearchingByAddress] = useState(false);
+  const [addressResults, setAddressResults] = useState([]);
+  const itemsPerPage = 10;
   const navigate = useNavigate();
 
   // Load carpark data from localStorage (bookings)
   useEffect(() => {
     const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
-    // Convert bookings into the format expected by UI
     const formattedOptions = bookings.map((booking) => {
       const totalLots = booking.slotsAvailable + booking.slotsReserved;
 
       return {
-        value: booking.carpark.toLowerCase().replace(/\s+/g, ""), // carparkA, carparkB
+        value: booking.carpark.toLowerCase().replace(/\s+/g, ""),
         label: booking.carpark,
         availableLots: booking.slotsAvailable,
         totalLots: totalLots,
-        location: booking.location || "Unknown Location", // Fallback if not provided
-        rates: booking.rates || "$2.50/hr", // Default rate if not set
+        location: booking.location || "Unknown Location",
+        rates: booking.rates || "$2.50/hr",
       };
     });
 
     setOptions(formattedOptions);
-  }, []); // Only run on initial mount
+  }, []);
 
   const handleChange = (option) => {
     navigate(`/carpark/${option.value}`);
@@ -38,36 +40,85 @@ const BrowseCarparkController = () => {
 
   const handleInputChange = (event) => {
     setSearchTerm(event.target.value);
-    setErrorMessage(""); // Clear error message on typing
-    setCurrentPage(1); // Reset to the first page when search term changes
+    setErrorMessage("");
+    setCurrentPage(1);
+    setIsSearchingByAddress(false);
+    setAddressResults([]);
   };
 
-  const handleKeyPress = (event) => {
+  const handleKeyPress = async (event) => {
     if (event.key === "Enter") {
-      if (searchTerm.trim() === "") { // Check for empty input
-        setErrorMessage("❌ No carpark selected. Please enter a valid carpark name.");
-        setShowTable(false); // Prevent displaying the table
+      if (searchTerm.trim() === "") {
+        setErrorMessage("❌ Please enter a carpark ID or address");
+        setShowTable(false);
         return;
       }
 
-      const filteredOptions = options.filter((option) =>
+      // First try to find exact matches by carpark ID
+      const filteredByID = options.filter((option) =>
         option.label.toLowerCase().includes(searchTerm.toLowerCase())
       );
 
-      if (filteredOptions.length === 0) { // Check if no valid carparks match
-        setErrorMessage(`❌ Invalid Carpark Name: "${searchTerm}". Please enter a valid carpark name.`);
-        setShowTable(false); // Prevent displaying the table
+      if (filteredByID.length > 0) {
+        setShowTable(true);
+        setIsSearchingByAddress(false);
         return;
       }
 
-      setShowTable(true); // Proceed to show table if valid options exist
+      // If no matches by ID, try searching by address
+      try {
+        const addressMatches = await fetchCarparksByAddress(searchTerm);
+        
+        if (addressMatches.length === 0) {
+          setErrorMessage(`❌ No carparks found for address: "${searchTerm}"`);
+          setShowTable(false);
+          return;
+        }
+
+        setAddressResults(addressMatches);
+        setIsSearchingByAddress(true);
+        setShowTable(true);
+
+        // Map address results to match the existing options format
+        const matchingOptions = addressMatches.map(match => {
+          const existingOption = options.find(opt => 
+            opt.label.toLowerCase() === match.carparkId.toLowerCase()
+          );
+
+          return {
+            value: match.carparkId.toLowerCase().replace(/\s+/g, ""),
+            label: match.carparkId,
+            address: match.address,
+            availableLots: existingOption ? existingOption.availableLots : "N/A",
+            totalLots: existingOption ? existingOption.totalLots : "N/A",
+            location: match.address,
+            rates: "$2.50/hr",
+          };
+        });
+
+        setOptions(prevOptions => {
+          // Combine the address search results with existing options
+          const newOptions = [...matchingOptions];
+          prevOptions.forEach(opt => {
+            if (!newOptions.find(no => no.value === opt.value)) {
+              newOptions.push(opt);
+            }
+          });
+          return newOptions;
+        });
+
+      } catch (error) {
+        console.error('Error searching by address:', error);
+        setErrorMessage('❌ Error searching by address. Please try again.');
+        setShowTable(false);
+      }
     }
   };
 
   // Filter options based on the search term
-  const filteredOptions = options.filter((option) =>
-    option.label.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredOptions = isSearchingByAddress
+    ? options.filter(option => addressResults.some(result => result.carparkId === option.label))
+    : options.filter(option => option.label.toLowerCase().includes(searchTerm.toLowerCase()));
 
   // Pagination logic
   const totalPages = Math.ceil(filteredOptions.length / itemsPerPage);
@@ -93,14 +144,15 @@ const BrowseCarparkController = () => {
       searchTerm={searchTerm}
       handleInputChange={handleInputChange}
       handleKeyPress={handleKeyPress}
-      filteredOptions={paginatedOptions} // Pass only paginated options
+      filteredOptions={paginatedOptions}
       handleChange={handleChange}
       showTable={showTable}
-      errorMessage={errorMessage} // Pass error message to UI
-      currentPage={currentPage} // Pass current page
-      totalPages={totalPages} // Pass total pages
-      handleNextPage={handleNextPage} // Pass next page handler
-      handlePreviousPage={handlePreviousPage} // Pass previous page handler
+      errorMessage={errorMessage}
+      currentPage={currentPage}
+      totalPages={totalPages}
+      handleNextPage={handleNextPage}
+      handlePreviousPage={handlePreviousPage}
+      isSearchingByAddress={isSearchingByAddress}
     />
   );
 };

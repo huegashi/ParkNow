@@ -9,7 +9,7 @@
   
   /* Header note styling */
   .browse-carpark-header p {
-    color: #555;
+    color: aqua;
     font-size: 0.9em;
     margin-bottom: 10px;
   }
@@ -109,4 +109,8 @@
 .pagination-info {
   font-size: 0.9rem;
   color: #333;
+}
+
+.bookings-header {
+  color: aquamarine;
 }

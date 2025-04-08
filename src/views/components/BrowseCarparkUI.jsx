@@ -12,19 +12,21 @@ const BrowseCarparkUI = ({
   currentPage, 
   totalPages, 
   handleNextPage, 
-  handlePreviousPage 
+  handlePreviousPage,
+  isSearchingByAddress
 }) => {
   return (
     <div className="browse-carpark-container">
       <div className="browse-carpark-header">
-        <p>*Press Enter to show all relevant carparks</p>
+        <p>Search by carpark ID (e.g. "ACB") or address (e.g. "BLK 270/271 ALBERT CENTRE BASEMENT CAR PARK")</p>
+        <p>*Press Enter to search</p>
       </div>
       <input
         type="text"
         value={searchTerm}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
-        placeholder="Search for a carpark..."
+        placeholder="Enter carpark ID or address..."
         className="browse-carpark-input"
       />
 
@@ -38,11 +40,14 @@ const BrowseCarparkUI = ({
         <>
           <div className="browse-carpark-note">
             <p>! indicates low availability</p>
+            {isSearchingByAddress && (
+              <p>Showing carparks matching the address search</p>
+            )}
           </div>
           <table className="browse-carpark-table">
             <thead>
               <tr>
-                <th>Carpark</th>
+                <th>Carpark ID</th>
                 <th>Available Lots</th>
                 <th>Location</th>
                 <th>Rate</th>
@@ -57,33 +62,35 @@ const BrowseCarparkUI = ({
                   <td>{option.location}</td>
                   <td>{option.rates}</td>
                   <td>
-                    <button className="select-button" onClick={() => handleChange(option)}>Select</button>
+                    <button 
+                      className="select-button" 
+                      onClick={() => handleChange(option)}
+                    >
+                      Select
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
 
-          {/* Pagination Controls */}
-          <div className="pagination-controls">
-            <button
-              onClick={handlePreviousPage}
-              disabled={currentPage === 1}
-              className="pagination-button"
-            >
-              Previous
-            </button>
-            <span className="pagination-info">
-              Page {currentPage} of {totalPages}
-            </span>
-            <button
-              onClick={handleNextPage}
-              disabled={currentPage === totalPages}
-              className="pagination-button"
-            >
-              Next
-            </button>
-          </div>
+          {totalPages > 1 && (
+            <div className="pagination-controls">
+              <button 
+                onClick={handlePreviousPage} 
+                disabled={currentPage === 1}
+              >
+                Previous
+              </button>
+              <span>Page {currentPage} of {totalPages}</span>
+              <button 
+                onClick={handleNextPage} 
+                disabled={currentPage === totalPages}
+              >
+                Next
+              </button>
+            </div>
+          )}
         </>
       )}
     </div>
