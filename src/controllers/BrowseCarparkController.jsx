@@ -131,7 +131,7 @@ const BrowseCarparkController = () => {
 
   // Filter options based on the search term
   const filteredOptions = isSearchingByAddress
-    ? options.filter(option => addressResults.some(result => result.carparkId === option.label))
+    ? options.filter(option => addressResults.some(result => result.carparkId === option.label) && option.availableLots !== "N/A")
     : options.filter(option => option.label.toLowerCase().includes(searchTerm.toLowerCase()));
 
   // Pagination logic
