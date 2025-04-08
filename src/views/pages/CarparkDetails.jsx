@@ -52,7 +52,7 @@ function CarparkDetails() {
             <p style={{ color: availabilityColor }}>
               <strong>Available Lots:</strong> {carparkData.slotsAvailable}/{carparkData.slotsAvailable + carparkData.slotsReserved}
             </p>
-            <p><strong>Hourly Rate:</strong> {carparkData.rate || carparkData.rates || 'N/A'}</p>
+            <p><strong>Hourly Rate:</strong> {carparkData.rate || carparkData.rates || '$2.40'}</p>
           </div>
           
           {/* Right side - Notification box */}

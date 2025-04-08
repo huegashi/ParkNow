@@ -27,7 +27,7 @@ const BrowseCarparkController = () => {
         availableLots: booking.slotsAvailable,
         totalLots: totalLots,
         location: booking.location || "Unknown Location",
-        rates: booking.rates || "$2.50/hr",
+        rates: booking.rates || "$2.40/hr",
       };
     });
 

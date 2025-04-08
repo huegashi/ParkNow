@@ -94,14 +94,6 @@
   background-color: #555;
 }
 
-.advanced-search {
-  max-width: 300px;
-  margin: 0 auto; /* Center the component */
-  font-family: Arial, sans-serif;
-  color: #ffffff;
-  margin-bottom: 50px;
-  
-}
 
 .bookings-list {
   text-align: center;
