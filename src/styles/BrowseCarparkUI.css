@@ -64,7 +64,7 @@
   /* Button styling */
   .select-button {
     padding: 5px 10px;
-    background-color: #007bff;
+    background-color: #DA70D6;
     color: white;
     border: none;
     border-radius: 5px;
@@ -82,22 +82,25 @@
   justify-content: center;
   align-items: center;
   margin-top: 15px;
+  gap: 10px;
 }
 
 /* Pagination buttons */
 .pagination-button {
   padding: 8px 12px;
   margin: 0 5px;
-  background-color: #007bff;
+  background-color: black;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 0.9rem;
+  width: 100px; /* Set a fixed width for uniform size */
+  text-align: center; /* Center-align the text inside the button */
 }
 
 .pagination-button:disabled {
-  background-color: #cccccc;
+  background-color: black;
   cursor: not-allowed;
 }
 
