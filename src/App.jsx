@@ -15,12 +15,14 @@ import BrowseCarparkController from "./controllers/BrowseCarparkController";
 import Booking from "./controllers/BookingController";
 import CancelBooking from "./controllers/CancelBookingController";
 import Register from "./controllers/Register";
+import NavigationMenu from "./views/components/NavigationMenu";
 
 function App() {
   return (
     <CarparkProvider>
       <Router>
-        <div>
+        <div className="app-container">
+          <NavigationMenu />
           <Routes>
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Authenticator />} />

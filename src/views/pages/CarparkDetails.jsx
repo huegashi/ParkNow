@@ -45,11 +45,14 @@ function CarparkDetails() {
         }}>
           {/* Left side - Carpark details */}
           <div style={{ flex: '1' }}>
-            <p><strong>Location:</strong> {carparkData.location || 'N/A'}</p>
+            <p><strong>Location:</strong> {carparkData.location && carparkData.location !== 'Unknown Location' 
+              ? carparkData.location 
+              : 'Address information not available'}
+            </p>
             <p style={{ color: availabilityColor }}>
               <strong>Available Lots:</strong> {carparkData.slotsAvailable}/{carparkData.slotsAvailable + carparkData.slotsReserved}
             </p>
-            <p><strong>Hourly Rate:</strong> {carparkData.rate || 'N/A'}</p>
+            <p><strong>Hourly Rate:</strong> {carparkData.rate || carparkData.rates || 'N/A'}</p>
           </div>
           
           {/* Right side - Notification box */}

@@ -35,6 +35,20 @@ const BrowseCarparkController = () => {
   }, []);
 
   const handleChange = (option) => {
+    // Update the carpark's location in localStorage before navigating
+    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    const updatedBookings = bookings.map(booking => {
+      if (booking.carpark.toLowerCase() === option.label.toLowerCase()) {
+        return {
+          ...booking,
+          location: option.location || booking.location
+        };
+      }
+      return booking;
+    });
+    localStorage.setItem("bookings", JSON.stringify(updatedBookings));
+    
+    // Navigate to the carpark details page
     navigate(`/carpark/${option.value}`);
   };
 
@@ -92,7 +106,7 @@ const BrowseCarparkController = () => {
             availableLots: existingOption ? existingOption.availableLots : "N/A",
             totalLots: existingOption ? existingOption.totalLots : "N/A",
             location: match.address,
-            rates: "$2.50/hr",
+            rates: existingOption ? existingOption.rates : "$2.50/hr",
           };
         });
 

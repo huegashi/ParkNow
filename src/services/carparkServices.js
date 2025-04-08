@@ -54,11 +54,16 @@ export async function fetchCarparkData() {
       // Filter carparks based on address search
       const searchTerms = searchAddress.toLowerCase().split(' ');
       const matchingCarparks = data.result.records.filter(carpark => {
+        if (!carpark.address) return false;
+        
         const address = carpark.address.toLowerCase();
         // Check if all search terms are present in the address
-        return searchTerms.every(term => address.includes(term));
+        return searchTerms.every(term => term.trim() && address.includes(term.trim()));
       });
 
+      // Log the number of matches for debugging
+      console.log(`Found ${matchingCarparks.length} carparks matching '${searchAddress}'`);
+      
       return matchingCarparks.map(carpark => ({
         carparkId: carpark.car_park_no,
         address: carpark.address,
