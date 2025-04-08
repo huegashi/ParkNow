@@ -77,6 +77,7 @@ const BrowseCarparkUI = ({
           {totalPages > 1 && (
             <div className="pagination-controls">
               <button 
+                className="pagination-button"
                 onClick={handlePreviousPage} 
                 disabled={currentPage === 1}
               >
@@ -84,6 +85,7 @@ const BrowseCarparkUI = ({
               </button>
               <span>Page {currentPage} of {totalPages}</span>
               <button 
+                className="pagination-button"
                 onClick={handleNextPage} 
                 disabled={currentPage === totalPages}
               >
