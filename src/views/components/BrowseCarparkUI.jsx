@@ -18,8 +18,8 @@ const BrowseCarparkUI = ({
   return (
     <div className="browse-carpark-container">
       <div className="browse-carpark-header">
-        <p>Search by carpark ID (e.g. "ACB") or address (e.g. "BLK 270/271 ALBERT CENTRE BASEMENT CAR PARK")</p>
-        <p>*Press Enter to search</p>
+        <p>Search by carpark ID or address</p>
+        {/* <p>*Press Enter to search</p> */}
       </div>
       <input
         type="text"
