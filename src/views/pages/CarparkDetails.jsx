@@ -70,7 +70,7 @@ function CarparkDetails() {
               textAlign: 'center', 
               margin: '0' 
             }}>
-              Upon check-in, a 30-minute allowance will be given for you to arrive at the reserved lot, after which the lot will be released for others to reserve.
+              Upon booking, a 30-minute allowance will be given for you to arrive at the reserved lot, otherwise the lot will be released for others to reserve.
             </p>
             <p style={{ 
               textAlign: 'center', 
