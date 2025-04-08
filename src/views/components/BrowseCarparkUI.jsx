@@ -17,7 +17,7 @@ const BrowseCarparkUI = ({
   return (
     <div className="browse-carpark-container">
       <div className="browse-carpark-header">
-        <p>*Press Enter to show all relevant carparks</p>
+        {/* <p>*Press Enter to show all relevant carparks</p> */}
       </div>
       <input
         type="text"
