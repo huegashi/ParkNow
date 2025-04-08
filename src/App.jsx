@@ -15,6 +15,7 @@ import BrowseCarparkController from "./controllers/BrowseCarparkController";
 import Booking from "./controllers/BookingController";
 import CancelBooking from "./controllers/CancelBookingController";
 import Register from "./controllers/Register";
+import ProtectedRoute from "./views/components/ProtectedRoute"; // Import the ProtectedRoute component
 
 function App() {
   return (
@@ -22,16 +23,68 @@ function App() {
       <Router>
         <div>
           <Routes>
+            {/* Public Routes */}
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Authenticator />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/carpark/:carparkName" element={<CarparkDetails />} />
-            <Route path="/booking/:carparkName" element={<Booking />} />
-            <Route path="/cancelbooking/:bookingId" element={<CancelBooking />} />
-            <Route path="/checkin/:bookingId" element={<CheckIn />} />
-            <Route path="/checkout/:bookingId" element={<CheckOut />} />
             <Route path="/login/register" element={<Register />} />
-            <Route path="/browse-carpark" element={<BrowseCarparkController />} />
+
+            {/* Protected Routes */}
+            <Route
+              path="/home"
+              element={
+                <ProtectedRoute>
+                  <Home />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/carpark/:carparkName"
+              element={
+                <ProtectedRoute>
+                  <CarparkDetails />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/booking/:carparkName"
+              element={
+                <ProtectedRoute>
+                  <Booking />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/cancelbooking/:bookingId"
+              element={
+                <ProtectedRoute>
+                  <CancelBooking />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/checkin/:bookingId"
+              element={
+                <ProtectedRoute>
+                  <CheckIn />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/checkout/:bookingId"
+              element={
+                <ProtectedRoute>
+                  <CheckOut />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/browse-carpark"
+              element={
+                <ProtectedRoute>
+                  <BrowseCarparkController />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </div>
       </Router>

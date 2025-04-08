@@ -7,9 +7,10 @@ const CarparkContext = createContext();
 // Create the provider component
 export const CarparkProvider = ({ children }) => {
   const [carparkInstance] = useState(new Carpark()); // Create a single instance of Carpark
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Add authentication state
 
   return (
-    <CarparkContext.Provider value={carparkInstance}>
+    <CarparkContext.Provider value={{ carparkInstance, isAuthenticated, setIsAuthenticated }}>
       {children}
     </CarparkContext.Provider>
   );
