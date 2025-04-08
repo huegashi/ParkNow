@@ -13,35 +13,38 @@
  }
 
 
-.MainBox{
-    width: 400px;
-    height: 300px;
-    padding: 20px;
-    background-color: lightblue;
-    display: flex;
-    flex-direction: column;
-    justify-content:center;
-    align-items:  center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
- }
+ .MainBox {
+  width: 400px;
+  height: 300px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+  backdrop-filter: blur(10px); /* Apply blur effect */
+  -webkit-backdrop-filter: blur(10px); /* For Safari support */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border for frosted effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+  border-radius: 10px; /* Rounded corners */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 
  .CancelHeader {
-    color: #333;
+    color: black;
     font-size: 24px;
     margin-bottom: 15px;
+    font-weight: bold;
   }
 
 
  .CancelParas {
   font-size: 16px;
-  color: #555;
+  color: black;
   margin: 10px 0;
  }
  
@@ -56,7 +59,7 @@
  
  
  .CancelButton {
-  background: #ff4d4d;
+  background: #DA70D6;
   color: white;
   border: none;
   padding: 10px 16px;
@@ -70,7 +73,7 @@
  
  
 .CancelButton:hover {
-  background: #cc0000;
+  background: #825b81;
  }
  
  
