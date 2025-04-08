@@ -22,7 +22,6 @@ function App() {
     <CarparkProvider>
       <Router>
         <div className="app-container">
-          <NavigationMenu />
           <Routes>
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Authenticator />} />
