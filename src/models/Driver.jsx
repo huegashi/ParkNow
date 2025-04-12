@@ -1,12 +1,17 @@
+import Booking from './Booking';
+
 class Driver {
     #username;
     #password;
-    #bookedCarparks;
+    #bookedCarpark;
+    #userId;
 
-    constructor(username, password) {
+    constructor(username, password, userId) {
         this.#username = username;
         this.#password = password;
-        this.#bookedCarparks = []; // Array to store bookings
+        this.#userId = userId;
+        // Initialize with empty booking using userId
+        this.#bookedCarpark = new Booking(userId, null, null);
     }
 
     getUsername() { return this.#username; }
@@ -15,10 +20,13 @@ class Driver {
     getPassword() { return this.#password; }
     setPassword(password) { this.#password = password; }
 
-    getBookedCarparks() { return this.#bookedCarparks; }
-    addBooking(booking) { this.#bookedCarparks.push(booking); }
-    removeBooking(bookingId) {
-        this.#bookedCarparks = this.#bookedCarparks.filter(booking => booking.id !== bookingId);
+    getUserId() { return this.#userId; }
+
+    getBookedCarpark() { return this.#bookedCarpark; }
+    setBooking(booking) { this.#bookedCarpark = booking; }
+    removeBooking() { 
+        // Use the current userId when creating new empty booking
+        this.#bookedCarpark = new Booking(this.#userId, null, null);
     }
 }
 

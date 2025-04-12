@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from 'uuid';
+
 class Booking {
     #id;        // String
     #userId;    // String
@@ -5,12 +7,12 @@ class Booking {
     #status;    // String
     #startTime; // DateTime
 
-    constructor(id, userId, carparkId, startTime) {
-        this.#id = id;
+    constructor(userId, carparkId, startTime) {
+        this.#id = uuidv4(); // Auto-generate ID
         this.#userId = userId;
         this.#carparkId = carparkId;
         this.#startTime = startTime;
-        this.#status = 'pending';
+        this.#status = 'No booking';
     }
 
     getId() { return this.#id; }
