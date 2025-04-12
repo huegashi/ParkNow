@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-
+//npx playwright test src/tests/register-exceptions.test.js --headed
 test.describe('Registration Form Validation Tests', () => {
   const baseURL = 'http://localhost:5173';
 
