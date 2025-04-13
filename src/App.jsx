@@ -11,11 +11,9 @@ import Home from "./views/pages/Home";
 import CarparkDetails from "./views/pages/CarparkDetails";
 import CheckIn from "./controllers/CheckInController";
 import CheckOut from "./controllers/CheckOutController";
-import BrowseCarparkController from "./controllers/BrowseCarparkController";
 import Booking from "./controllers/BookingController";
 import CancelBooking from "./controllers/CancelBookingController";
 import Register from "./controllers/Register";
-import NavigationMenu from "./views/components/NavigationMenu";
 
 function App() {
   return (
@@ -32,7 +30,6 @@ function App() {
             <Route path="/checkin/:bookingId" element={<CheckIn />} />
             <Route path="/checkout/:bookingId" element={<CheckOut />} />
             <Route path="/login/register" element={<Register />} />
-            <Route path="/browse-carpark" element={<BrowseCarparkController />} />
           </Routes>
         </div>
       </Router>
